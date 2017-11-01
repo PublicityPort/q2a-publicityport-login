@@ -74,7 +74,7 @@ If something happens with the login process and authentication cannot be done, t
 
 ## Translation ##
 
-The translation file is **qa-open-lang-default.php**.  Copy this file to the same directory and change the **"default"** part of the filename to your language code. Edit the right-hand side strings in this file, for example, changing: `'my_logins_title'=>'My logins',` to `'my_logins_title'=>'Mes comptes',`
+The translation file is **qa-publicityport-lang-default.php**.  Copy this file to the same directory and change the **"default"** part of the filename to your language code. Edit the right-hand side strings in this file, for example, changing: `'my_logins_title'=>'My logins',` to `'my_logins_title'=>'Mes comptes',`
 
 Don't edit the string on the left-hand side. Once you've completed the translation, don't forget to set the site language in the admin control panel. Translations for Romanian are also included.
 
