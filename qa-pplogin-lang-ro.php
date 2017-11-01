@@ -1,31 +1,5 @@
 <?php
 
-/*
-	Question2Answer (c) Gideon Greenspan
-	Open Login Plugin (c) Alex Lixandru
-
-	http://www.question2answer.org/
-
-	
-	File: qa-plugin/open-login/qa-open-lang-ro.php
-	Version: 3.0.0
-	Description: Romanian translation of all plugin texts
-
-
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	More about this license: http://www.question2answer.org/license.php
-*/
-
-
 return array(
 	'my_logins_title' => 'Conturile mele asociate',
 	'my_logins_nav' => 'Conturi asociate',

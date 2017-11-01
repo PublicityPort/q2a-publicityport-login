@@ -32,10 +32,6 @@ class Hybrid_Providers_PublicityPort extends Hybrid_Provider_Model_OAuth2
 	function getUserProfile()
 	{
 	
-		file_put_contents("debug.log" ,
-		"\n@getUserProfile value of URL\n " . $this->api->api_base_url . "me" ,
-		FILE_APPEND );
-
 		$ch = curl_init($this->api->api_base_url . "me");
 		curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
 		curl_setopt( $ch, CURLOPT_ENCODING, "" );
@@ -49,14 +45,7 @@ class Hybrid_Providers_PublicityPort extends Hybrid_Provider_Model_OAuth2
 				));
 				
 		$content = curl_exec($ch);
-		// WordPress requires the token to be passed as a Bearer within the Header
-		//$this->api->curl_header = array( 'Authorization: Bearer ' . $this->api->access_token );
-		
-		file_put_contents("debug.log" ,
-		"\n@getUserProfile value of content\n " . $content ,
-		FILE_APPEND );
 
-		//$data = $this->api->get( "me" );
 		$data = json_decode( $content );
 		
 		if ( ! isset( $data->ID ) ) {

@@ -1,32 +1,5 @@
 <?php
 
-/*
-	Question2Answer (c) Gideon Greenspan
-	Open Login Plugin (c) Alex Lixandru
-
-	http://www.question2answer.org/
-
-	
-	File: qa-plugin/open-login/qa-open-overrides.php
-	Version: 3.0.0
-	Description: Overrides the core login functionality
-
-
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	More about this license: http://www.question2answer.org/license.php
-*/
-
-
-
 /**
  * Extends the logout functionality by performing some extra clean up for
  * the external login modules.
@@ -67,7 +40,7 @@ function qa_set_logged_in_user($userid, $handle='', $remember=false, $source=nul
 function qa_log_in_external_user($source, $identifier, $fields)
 {
 	require_once QA_INCLUDE_DIR.'qa-db-users.php';
-	$remember = qa_opt('open_login_remember') ? true : false;
+	$remember = qa_opt('publicityport_login_remember') ? true : false;
 	
 	$users=qa_db_user_login_find($source, $identifier);
 	$countusers=count($users);
@@ -82,7 +55,7 @@ function qa_log_in_external_user($source, $identifier, $fields)
 	 * 'yahoo-xyt' when logging in with the other.
 	 */
 	
-	$aggsource = qa_open_login_get_new_source($source, $identifier);
+	$aggsource = qa_publicityport_login_get_new_source($source, $identifier);
 	
 	// prepare some data
 	if(empty($fields['handle'])) {

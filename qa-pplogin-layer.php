@@ -1,30 +1,5 @@
 <?php
 
-/*
-	Question2Answer (c) Gideon Greenspan
-	Open Login Plugin (c) Alex Lixandru
-
-	http://www.question2answer.org/
-
-	
-	File: qa-plugin/open-login/qa-open-layer.php
-	Version: 3.0.0
-	Description: Extends current theme with additional functionalities
-
-
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	More about this license: http://www.question2answer.org/license.php
-*/
-
 
 class qa_html_theme_layer extends qa_html_theme_base
 {
@@ -68,7 +43,7 @@ class qa_html_theme_layer extends qa_html_theme_base
 			$descr = qa_lang_html('plugin_open/login_description');
 			
 			// hide login/register links from navigation on any page
-			if(qa_opt('open_login_hideform') == '1') {
+			if(qa_opt('publicityport_login_hideform') == '1') {
 				unset($this->content['navigation']['user']['login']);
 				unset($this->content['navigation']['user']['register']);
 			}
@@ -80,7 +55,7 @@ class qa_html_theme_layer extends qa_html_theme_base
 			}
 			
 			// hide regular login/register form on those pages only
-			if(qa_opt('open_login_hideform') == '1') {
+			if(qa_opt('publicityport_login_hideform') == '1') {
 				$this->content['title'] = $title;
 				$this->content['form'] = null;
 			}
@@ -101,22 +76,15 @@ class qa_html_theme_layer extends qa_html_theme_base
 	function head_css() {
 		parent::head_css();
 		
-		$hidecss = qa_opt('open_login_css') == '1';
-		$zocial = qa_opt('open_login_zocial') == '1';
-		
+		$hidecss = qa_opt('publicityport_login_css') == '1';
+				
 		if (!$hidecss) {
 			// display CSS inline
 			$path = QA_HTML_THEME_LAYER_URLTOROOT;
 			
 			$this->output('<style type="text/css"><!--');
-			$this->output(@file_get_contents( QA_HTML_THEME_LAYER_URLTOROOT . 'qa-open-login.css'));
+			$this->output(@file_get_contents( QA_HTML_THEME_LAYER_URLTOROOT . 'qa-pplogin-login.css'));
 			$this->output('//--></style>');
-			
-			if($zocial) {
-				$this->output('<style type="text/css"><!--');
-				$this->output("@import url('{$path}css/zocial.css');");
-				$this->output('//--></style>');
-			}
 		}
 	}
 

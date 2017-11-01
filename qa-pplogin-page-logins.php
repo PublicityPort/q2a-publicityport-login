@@ -1,32 +1,6 @@
 <?php
 	
-/*
-	Question2Answer (c) Gideon Greenspan
-	Open Login Plugin (c) Alex Lixandru
-
-	http://www.question2answer.org/
-
-	
-	File: qa-plugin/open-login/qa-open-page-logins.php
-	Version: 3.0.0
-	Description: Implements the business logic for the plugin custom page
-
-
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	More about this license: http://www.question2answer.org/license.php
-*/
-
-
-class qa_open_logins_page {
+class qa_publicityport_logins_page {
 	var $directory;
 	var $urltoroot;
 
@@ -38,7 +12,7 @@ class qa_open_logins_page {
 	function init_queries( $tableslc ) {
 		// check if the plugin is initialized
 		
-		$ok = qa_opt('open_login_ok');
+		$ok = qa_opt('publicityport_login_ok');
 		if ( $ok == 3 ) {
 			return null;
 		}
@@ -66,7 +40,7 @@ class qa_open_logins_page {
 		}
 		
 		// we're already set up
-		qa_opt('open_login_ok', '3');
+		qa_opt('publicityport_login_ok', '3');
 		return null;
 	}
 
@@ -80,7 +54,7 @@ class qa_open_logins_page {
 		require_once QA_INCLUDE_DIR.'qa-app-format.php';
 		require_once QA_INCLUDE_DIR.'qa-app-users.php';
 		require_once QA_INCLUDE_DIR.'qa-db-selects.php';
-		require_once $this->directory . 'qa-open-utils.php';
+		require_once $this->directory . 'qa-pplogin-utils.php';
 		
 		//	Check we're not using single-sign on integration, that we're logged in
 		
@@ -289,7 +263,7 @@ class qa_open_logins_page {
 				$key = "{$login['source']}_" . md5($login['identifier']);
 				if($key == $unlink) {
 					// account found, but don't unlink if currently in use
-					if($useraccount['sessionsource'] != qa_open_login_get_new_source($login['source'], $login['identifier'])) {
+					if($useraccount['sessionsource'] != qa_publicityport_login_get_new_source($login['source'], $login['identifier'])) {
 						// ok, we need to delete this one
 						qa_db_user_login_sync(true);
 						qa_db_user_login_delete__open($login['source'], $login['identifier'], $userid);
@@ -337,7 +311,7 @@ class qa_open_logins_page {
 			$loginCallback = qa_path('', array(), qa_opt('site_url'));
 			
 			require_once( $this->directory . 'Hybrid/Auth.php' );
-			require_once( $this->directory . 'qa-open-utils.php' );
+			require_once( $this->directory . 'qa-pplogin-utils.php' );
 			
 			// prepare the configuration of HybridAuth
 			$config = $this->get_ha_config($provider, $loginCallback);
@@ -421,7 +395,7 @@ class qa_open_logins_page {
 		// display some summary about the user
 		$qa_content['form_profile']=array(
 			'title' => qa_lang_html('plugin_open/my_current_user'),
-			'tags' => 'ENCTYPE="multipart/form-data" METHOD="POST" ACTION="'.qa_self_html().'" CLASS="open-login-profile"',
+			'tags' => 'ENCTYPE="multipart/form-data" METHOD="POST" ACTION="'.qa_self_html().'" CLASS="publicityport-login-profile"',
 			'style' => 'wide',
 			'fields' => array(
 				'handle' => array(
@@ -450,12 +424,12 @@ class qa_open_logins_page {
 	
 	function display_logins(&$qa_content, $useraccount, $mylogins) {
 		if(!empty($mylogins)) {
-			require_once $this->directory . 'qa-open-login.php';
+			require_once $this->directory . 'qa-pplogin-login.php';
 			
 			// display the logins already linked to this user account
 			$qa_content['custom_mylogins']='<h2>' . qa_lang_html('plugin_open/associated_logins') . '</h2><p>' . qa_lang_html('plugin_open/split_accounts_note') . '</p>';
 			$qa_content['form_mylogins']=array(
-				'tags' => 'ENCTYPE="multipart/form-data" METHOD="POST" ACTION="'.qa_self_html().'" CLASS="open-login-accounts"',
+				'tags' => 'ENCTYPE="multipart/form-data" METHOD="POST" ACTION="'.qa_self_html().'" CLASS="publicityport-login-accounts"',
 				'style' => 'wide',
 				'hidden' => array(
 					'dosplit' => '1',
@@ -466,13 +440,13 @@ class qa_open_logins_page {
 			foreach($mylogins as $i => $login) {
 				$del_html = '';
 				
-				$s = qa_open_login_get_new_source($login['source'], $login['identifier']);
+				$s = qa_publicityport_login_get_new_source($login['source'], $login['identifier']);
 				if($useraccount['sessionsource'] != $s) {
 					$del_html = '<a href="javascript://" onclick="OP_unlink(\'' . $login['source'] . '_' . md5($login['identifier']) . '\')" class="opacxdel qa-form-light-button-reject" title="'. qa_lang_html('plugin_open/unlink_this_account') .'">&nbsp;</a>';
 				}
 				
 				$data["f$i"] = array(
-					'label' => qa_open_login::printCode(ucfirst($login['source']), empty($login['ohandle']) ? ucfirst($login['source']) : $login['ohandle'], 'menu', 'view', false) . $del_html,
+					'label' => qa_publicityport_login::printCode(ucfirst($login['source']), empty($login['ohandle']) ? ucfirst($login['source']) : $login['ohandle'], 'menu', 'view', false) . $del_html,
 					'type' => 'static',
 					'style' => 'tall'
 				);
@@ -480,8 +454,8 @@ class qa_open_logins_page {
 			$qa_content['form_mylogins']['fields'] = $data;
 			$qa_content['customscriptu'] = '<script type="text/javascript">
 				function OP_unlink(id) {
-					$(".qa-main form.open-login-accounts>input[name=dosplit]").attr("value", id);
-					$(".qa-main form.open-login-accounts").submit();
+					$(".qa-main form.publicityport-login-accounts>input[name=dosplit]").attr("value", id);
+					$(".qa-main form.publicityport-login-accounts").submit();
 				}
 			</script>';
 		}
@@ -503,7 +477,7 @@ class qa_open_logins_page {
 			
 			$qa_content['custom_merge']="$title <p>$p</p>";
 			$qa_content['form_merge']=array(
-				'tags' => 'ENCTYPE="multipart/form-data" METHOD="POST" ACTION="'.qa_self_html().'" CLASS="open-login-others"',
+				'tags' => 'ENCTYPE="multipart/form-data" METHOD="POST" ACTION="'.qa_self_html().'" CLASS="publicityport-login-others"',
 				'style' => 'wide',
 				'buttons' => array(
 					'save' => array(
@@ -590,7 +564,7 @@ class qa_open_logins_page {
 				function OP_actionSelected(i, divid) {
 					$(".opacxhtml").slideUp();
 					if(i != 2 || op_last_action == 2) {
-						$(".qa-main form.open-login-others input[type=checkbox]").css("visibility", "hidden");
+						$(".qa-main form.publicityport-login-others input[type=checkbox]").css("visibility", "hidden");
 					}
 					
 					if(op_last_action == i) {
@@ -600,39 +574,39 @@ class qa_open_logins_page {
 					}
 					op_last_action = i;
 					$(divid).slideDown();
-					$(".qa-main form.open-login-others>input[name=domerge]").attr("value", i);
+					$(".qa-main form.publicityport-login-others>input[name=domerge]").attr("value", i);
 					
 					if(i > 0) {
-						$(".qa-main form.open-login-others input[type=checkbox]").attr("checked", "checked");
+						$(".qa-main form.publicityport-login-others input[type=checkbox]").attr("checked", "checked");
 						if(i == 2) {
-							$(".qa-main form.open-login-others input[type=checkbox]").css("visibility", "visible");
-							$(".qa-main form.open-login-others select[name=base2]").html( $(".qa-main form.open-login-others select[name=base1]").html() );
+							$(".qa-main form.publicityport-login-others input[type=checkbox]").css("visibility", "visible");
+							$(".qa-main form.publicityport-login-others select[name=base2]").html( $(".qa-main form.publicityport-login-others select[name=base1]").html() );
 						}
-						sel = $(".qa-main form.open-login-others select[name=base" + i +"]").get(0);
+						sel = $(".qa-main form.publicityport-login-others select[name=base" + i +"]").get(0);
 						sel.selectedIndex = 0;
 						OP_baseSelected(sel);
 					} else {
-						$(".qa-main form.open-login-others span.qa-form-wide-note").html("' . qa_lang_html('plugin_open/action_info_2') . '"); 
-						$(".qa-main form.open-login-others input[type=submit]").show(); 
-						$(".qa-main form.open-login-others input[type=submit]").attr("disabled", false);
+						$(".qa-main form.publicityport-login-others span.qa-form-wide-note").html("' . qa_lang_html('plugin_open/action_info_2') . '"); 
+						$(".qa-main form.publicityport-login-others input[type=submit]").show(); 
+						$(".qa-main form.publicityport-login-others input[type=submit]").attr("disabled", false);
 					}
 				}
 				
 				function OP_baseSelected(sel) {
 					if(!sel || sel.selectedIndex == 0) {
 						if(sel) {
-							$(".qa-main form.open-login-others span.qa-form-wide-note").html("' . qa_lang_html('plugin_open/action_info_3') . '")
+							$(".qa-main form.publicityport-login-others span.qa-form-wide-note").html("' . qa_lang_html('plugin_open/action_info_3') . '")
 						} else {
-							$(".qa-main form.open-login-others span.qa-form-wide-note").html("' . qa_lang_html('plugin_open/action_info_1') . '")
+							$(".qa-main form.publicityport-login-others span.qa-form-wide-note").html("' . qa_lang_html('plugin_open/action_info_1') . '")
 						}
-						$(".qa-main form.open-login-others input[type=submit]").hide()
-						$(".qa-main form.open-login-others input[type=submit]").attr("disabled", "disabled")
+						$(".qa-main form.publicityport-login-others input[type=submit]").hide()
+						$(".qa-main form.publicityport-login-others input[type=submit]").attr("disabled", "disabled")
 					} else {
 						if(OP_accValid()) {
 							nam = $("option:selected", sel).attr("title")
-							$(".qa-main form.open-login-others span.qa-form-wide-note").html("<strong>" + nam + "</strong> '  . qa_lang_html('plugin_open/action_info_4') . '")
-							$(".qa-main form.open-login-others input[type=submit]").show()
-							$(".qa-main form.open-login-others input[type=submit]").attr("disabled", false)
+							$(".qa-main form.publicityport-login-others span.qa-form-wide-note").html("<strong>" + nam + "</strong> '  . qa_lang_html('plugin_open/action_info_4') . '")
+							$(".qa-main form.publicityport-login-others input[type=submit]").show()
+							$(".qa-main form.publicityport-login-others input[type=submit]").attr("disabled", false)
 						}
 					}
 				}
@@ -642,33 +616,33 @@ class qa_open_logins_page {
 					var rel = $(check).attr("rel")
 					var id = $(check).attr("value")
 					var chk = $(check).attr("checked")
-					$(".qa-main form.open-login-others select[name=base2]").get(0).selectedIndex = 0
+					$(".qa-main form.publicityport-login-others select[name=base2]").get(0).selectedIndex = 0
 					if(chk) {
-						$(".qa-main form.open-login-others select[name=base2] option[value=" + id + "]").show()
+						$(".qa-main form.publicityport-login-others select[name=base2] option[value=" + id + "]").show()
 					} else {
-						$(".qa-main form.open-login-others select[name=base2] option[value=" + id + "]").hide()
+						$(".qa-main form.publicityport-login-others select[name=base2] option[value=" + id + "]").hide()
 					}
 					OP_accValid() ') . '
 				}
 				
 				function OP_accValid() {
 					if(op_last_action != 2) {
-						$(".qa-main form.open-login-others input[type=checkbox]").attr("checked", "checked")
+						$(".qa-main form.publicityport-login-others input[type=checkbox]").attr("checked", "checked")
 						return true
 					}
 					
 					someSel = false 
-					$(".qa-main form.open-login-others input[type=checkbox]").each(function(i, o) { 
+					$(".qa-main form.publicityport-login-others input[type=checkbox]").each(function(i, o) { 
 						someSel = someSel || $(o).attr("checked") == "checked"
 					});
 					
-					$(".qa-main form.open-login-others input[type=submit]").hide();
-					$(".qa-main form.open-login-others input[type=submit]").attr("disabled", "disabled");
+					$(".qa-main form.publicityport-login-others input[type=submit]").hide();
+					$(".qa-main form.publicityport-login-others input[type=submit]").attr("disabled", "disabled");
 					if(!someSel) { // nothing selected
-						$(".qa-main form.open-login-others span.qa-form-wide-note").html("' . qa_lang_html('plugin_open/action_info_5') . '");
+						$(".qa-main form.publicityport-login-others span.qa-form-wide-note").html("' . qa_lang_html('plugin_open/action_info_5') . '");
 						return false;
 					} else {
-						$(".qa-main form.open-login-others span.qa-form-wide-note").html("' . qa_lang_html('plugin_open/action_info_3') . '");
+						$(".qa-main form.publicityport-login-others span.qa-form-wide-note").html("' . qa_lang_html('plugin_open/action_info_3') . '");
 						return true;
 					}
 				}
@@ -702,7 +676,7 @@ class qa_open_logins_page {
 		
 		foreach ($loginmodules as $module) {
 			ob_start();
-			qa_open_login::printCode($module->provider, null, 'associate', 'link');
+			qa_publicityport_login::printCode($module->provider, null, 'associate', 'link');
 			$html=ob_get_clean();
 			
 			if (strlen($html))
@@ -780,48 +754,39 @@ class qa_open_logins_page {
 			);
 			
 			// also save the other configurations
-			$hidecss = qa_post_text('open_login_css');
-			qa_opt('open_login_css', empty($hidecss) ? 0 : 1);
+			$hidecss = qa_post_text('publicityport_login_css');
+			qa_opt('publicityport_login_css', empty($hidecss) ? 0 : 1);
+
 			
-			$zocial = qa_post_text('open_login_zocial');
-			qa_opt('open_login_zocial', empty($zocial) ? 0 : 1);
+			$nologin = qa_post_text('publicityport_login_hideform');
+			qa_opt('publicityport_login_hideform', empty($nologin) ? 0 : 1);
 			
-			$nologin = qa_post_text('open_login_hideform');
-			qa_opt('open_login_hideform', empty($nologin) ? 0 : 1);
-			
-			$remember = qa_post_text('open_login_remember');
-			qa_opt('open_login_remember', empty($remember) ? 0 : 1);
+			$remember = qa_post_text('publicityport_login_remember');
+			qa_opt('publicityport_login_remember', empty($remember) ? 0 : 1);
 			$saved=true;
 		}
 		
 		$form = array(
-			'ok' => $saved ? 'Open Login preferences saved' : null,
+			'ok' => $saved ? 'PublicityPort Login preferences saved' : null,
 			
 			'fields' => array(
 				array(
 					'type' => 'checkbox',
 					'label' => 'Don\'t inline CSS. I included the styles in my theme\'s CSS file',
-					'value' => qa_opt('open_login_css') ? true : false,
-					'tags' => 'NAME="open_login_css"',
-				),
-				
-				array(
-					'type' => 'checkbox',
-					'label' => 'Use <a href="http://zocial.smcllns.com/">Zocial buttons</a> (works out-of-the-box with inlined CSS; if "Don\'t inline CSS" checkbox is selected, the custom theme must be manually modified to import <i>zocial.css</i> file)',
-					'value' => qa_opt('open_login_zocial') ? true : false,
-					'tags' => 'NAME="open_login_zocial"',
+					'value' => qa_opt('publicityport_login_css') ? true : false,
+					'tags' => 'NAME="publicityport_login_css"',
 				),
 				array(
 					'type' => 'checkbox',
 					'label' => 'Hide regular login/register forms and keep only external login buttons (might require theme changes)',
-					'value' => qa_opt('open_login_hideform') ? true : false,
-					'tags' => 'NAME="open_login_hideform"',
+					'value' => qa_opt('publicityport_login_hideform') ? true : false,
+					'tags' => 'NAME="publicityport_login_hideform"',
 				),
 				array(
 					'type' => 'checkbox',
 					'label' => 'Keep users logged in when they connect through external login providers (this will log users in automatically when they return to the site, even if they close their browsers)',
-					'value' => qa_opt('open_login_remember') ? true : false,
-					'tags' => 'NAME="open_login_remember"',
+					'value' => qa_opt('publicityport_login_remember') ? true : false,
+					'tags' => 'NAME="publicityport_login_remember"',
 				),
 				array(
 					'type' => 'static',
@@ -873,24 +838,6 @@ class qa_open_logins_page {
 				'value' => qa_html(qa_opt("{$key}_app_secret")),
 				'tags' => "NAME=\"{$key}_app_secret_field\"",
 			);
-			
-			$docUrl = "http://hybridauth.sourceforge.net/userguide/IDProvider_info_{$provider}.html";
-			if($provider == 'Yahoo') {
-				$form['fields'][] = array(
-					'type' => 'static',
-					'label' => 'By default, <strong>' . $provider . '</strong> uses OpenID and does not need any keys, so these fields should ' .
-								'be left blank. However, if you replaced the provider file with the one that uses OAuth, and not OpenID, you ' .
-								'need to provide the app keys. In this case, click on <a href="' . $docUrl . '" target="_blank">' . $docUrl . '</a> ' .
-								'for information on how to get them.',
-				);
-				
-			} else {
-				$form['fields'][] = array(
-					'type' => 'static',
-					'label' => 'For information on how to setup your application with <strong>' . $provider . '</strong> ' .
-								'see the <strong>Registering application</strong> section from <a href="' . $docUrl . '" target="_blank">' . $docUrl . '</a>.',
-				);
-			}
 			
 			$form['fields'][] = array(
 				'type' => 'static',

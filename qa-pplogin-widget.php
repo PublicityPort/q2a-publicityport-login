@@ -1,31 +1,6 @@
 <?php
 
-/*
-	Question2Answer (c) Gideon Greenspan
-	Open Login Plugin (c) Alex Lixandru
-
-	http://www.question2answer.org/
-
-	
-	File: qa-plugin/open-login/qa-open-widget.php
-	Version: 3.0.0
-	Description: Widget module class open login plugin
-
-
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	More about this license: http://www.question2answer.org/license.php
-*/
-
-	class qa_open_logins_widget {
+	class qa_publicityport_logins_widget {
 		
 		function allow_template($template) {
 			
@@ -56,10 +31,10 @@
 			}
 			
 			$themeobject->output(
-				'<div class="open-login-sidebar">',
+				'<div class="publicityport-login-sidebar">',
 				qa_lang_html('plugin_open/login_title'),
 				'</div>',
-				'<p class="open-login-sidebar-buttons">'
+				'<p class="publicityport-login-sidebar-buttons">'
 			);
 			
 			foreach ($loginmodules as $tryname => $module) {

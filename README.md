@@ -1,4 +1,4 @@
-# Question2Answer Open Login #
+# Question2Answer PublicityPort Login #
 
 ## About ##
 
@@ -19,7 +19,7 @@ The plugin also offers the ability to link multiple OpenID/OAuth-powered logins 
 
    - To download using git, install git and then type 
       
-      `git clone git://github.com/alixandru/q2a-open-login.git open-login`
+      `git clone git://github.com/alixandru/q2a-publicityport-login.git publicityport-login`
       
    - To download directly, go to the [project page][Github] and click **[Download ZIP][download]**
 
@@ -30,8 +30,7 @@ The plugin also offers the ability to link multiple OpenID/OAuth-powered logins 
 ## Configuration ##
 
 * Go to **Admin -> Plugins** on your Q2A installation and enable the providers which you would like to use. For all OAuth-based providers (all, except Yahoo, which uses OpenID) you need to provide some keys after you register your application with them. Check the documentation URL below each login provider in the administration page; it will take you to the HybridAuth documentation page which contains information on how to register your application and what Callback URL to use.
-* Optionally, add the contents of the *qa-open-login.css* file to your theme's CSS file and select the option **Don't inline CSS** from the **Open Login Configuration** section on the **Admin -> Plugins** page. 
-* Optionally, enable stylish CSS icons for the login links (through the *Zocial* pack) by selecting the option **Use Zocial buttons** from the **Open Login Configuration** section on the **Admin -> Plugins** page. In case you are using a custom theme, you need to perform an extra step: manually modify the theme's CSS file to import `zocial.css` file (usually by adding `@import url('/path-to-q2a/qa-plugin/q2a-open-login/css/zocial.css');` at the top of the file). Please note that, according to the URL of your Q2A instance, you might need to adjust the paths in the CSS file. 
+* Optionally, add the contents of the *qa-publicityport-login.css* file to your theme's CSS file and select the option **Don't inline CSS** from the **PublicityPort Login Configuration** section on the **Admin -> Plugins** page. 
 
 
 ### Technical notes ###
@@ -41,10 +40,10 @@ The plugin also offers the ability to link multiple OpenID/OAuth-powered logins 
 
   [Question2Answer]: http://www.question2answer.org/install.php
   [Git]: http://git-scm.com/
-  [Github]: https://github.com/alixandru/q2a-open-login
+  [Github]: https://github.com/alixandru/q2a-publicityport-login
   [cURL]: http://www.php.net/manual/en/book.curl.php
   [JSON]: http://www.php.net/manual/en/book.json.php
-  [download]: https://github.com/alixandru/q2a-open-login/archive/master.zip
+  [download]: https://github.com/alixandru/q2a-publicityport-login/archive/master.zip
 
 
 ### Adding new login providers ###

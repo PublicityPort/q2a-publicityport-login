@@ -1,0 +1,45 @@
+
+	.publicityport-login-button.context-associate,
+	.publicityport-login-button.context-login,
+	.publicityport-login-button.context-register {
+		font-weight: bold;
+		display: inline-block;
+		margin-top: 5px;
+		width: 30%;
+	}
+	
+	.publicityport-login-button.context-sidebar {
+		font-weight: bold;
+		margin: 0 10px 5px 10px;
+		display: block;
+		max-width: 90%;
+	}
+	
+	.publicityport-login-profile, .publicityport-login-accounts, .publicityport-login-others {
+		padding-bottom: 40px;
+		border-bottom: 1px solid gray;
+	}
+	
+	.qa-nav-user { /* this should not have negative effects */
+		height: 24px;
+		margin-top: 4px;
+	}
+	
+	.publicityport-login-others .opacxhtml select {
+		margin: 5px 0;
+	}
+	
+	.publicityport-login-others .opacxhtml {
+		padding-left: 35px;
+	}
+	
+	.publicityport-login-accounts a.opacxdel:hover {
+		text-decoration: none;
+	}
+	
+	.publicityport-login-accounts a.opacxdel{
+		display: inline-block;
+		line-height: 25px;
+		margin: 0 5px;
+	}
+	/* End of PublicityPort Login buttons */

@@ -132,10 +132,6 @@ class OAuth2Client
     if ( strrpos($url, 'http://') !== 0 && strrpos($url, 'https://') !== 0 ) {
       $url = $this->api_base_url . $url;
     }
-    
-    file_put_contents("debug.log" ,
-    "@api value of url" . $url ,
-    FILE_APPEND );	
 
     $parameters[$this->sign_token_name] = $this->access_token;
     $response = null;
@@ -144,14 +140,6 @@ class OAuth2Client
       case 'GET'  : $response = $this->request( $url, $parameters, "GET"  ); break;
       case 'POST' : $response = $this->request( $url, $parameters, "POST" ); break;
     }
-
-    file_put_contents("debug.log" ,
-    "\n@api value of decode_json\n " . $this->decode_json ,
-    FILE_APPEND );
-
-    file_put_contents("debug.log" ,
-    "\n@api value of response \n" . $response ,
-    FILE_APPEND );
     
     if( $response && $this->decode_json ){
       return $this->response = json_decode( $response );

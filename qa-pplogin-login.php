@@ -1,32 +1,6 @@
 <?php
 
-/*
-	Question2Answer (c) Gideon Greenspan
-	Open Login Plugin (c) Alex Lixandru
-
-	http://www.question2answer.org/
-
-	
-	File: qa-plugin/open-login/qa-open-login.php
-	Version: 3.0.0
-	Description: Login module class for handling OpenID/OAuth logins 
-	through HybridAuth library
-
-
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	More about this license: http://www.question2answer.org/license.php
-*/
-
-class qa_open_login {
+class qa_publicityport_login {
 	
 	var $directory;
 	var $urltoroot;
@@ -75,7 +49,7 @@ class qa_open_login {
 			$loginCallback = qa_path('', array(), qa_opt('site_url'));
 			
 			require_once $this->directory . 'Hybrid/Auth.php';
-			require_once $this->directory . 'qa-open-utils.php';
+			require_once $this->directory . 'qa-pplogin-utils.php';
 			
 			// prepare the configuration of HybridAuth
 			$config = $this->getConfig($loginCallback);
@@ -208,10 +182,9 @@ class qa_open_login {
 			return;
 		}
 		
-		$zocial = qa_opt('open_login_zocial') == '1' ? 'zocial' : ''; // use zocial buttons
 		if($action == 'logout') {
 			$url = $tourl;
-			$classes = "$context action-logout $zocial $css";
+			$classes = "$context action-logout $css";
 			$title = qa_lang_html('main/nav_logout');
 			$text = qa_lang_html('main/nav_logout');
 			
@@ -232,7 +205,7 @@ class qa_open_login {
 			if(strlen($tourl) > 0) {
 				$url .= '&amp;to=' . htmlspecialchars($tourl); // play nice with validators
 			}
-			$classes = "$context action-login $zocial  $css";
+			$classes = "$context action-login $css";
 			$title = qa_lang_html_sub('plugin_open/login_using', $provider);
 			$text = $provider . ' ' . qa_lang_html('main/nav_login');
 			
@@ -242,7 +215,7 @@ class qa_open_login {
 			
 		} else if($action == 'link') {
 			$url = qa_path('logins', array('link' => $key), qa_path_to_root()); // build our own url
-			$classes = "$context action-link $zocial $css";
+			$classes = "$context action-link $css";
 			$title = qa_lang_html_sub('plugin_open/login_using', $provider);
 			$text = qa_lang_html('main/nav_login');
 			
@@ -252,13 +225,13 @@ class qa_open_login {
 			
 		} else if($action == 'view') {
 			$url = 'javascript://';
-			$classes = "$context action-link $zocial $css";
+			$classes = "$context action-link $css";
 			$title = $provider;
 			$text = $tourl;
 		}
 		
 		$html = <<<HTML
-  <a class="open-login-button context-$classes" title="$title" href="$url" rel="nofollow">$text</a>
+  <a class="publicityport-login-button context-$classes" title="$title" href="$url" rel="nofollow">$text</a>
 HTML;
 		if($print) {
 			echo $html;
