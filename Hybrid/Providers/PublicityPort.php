@@ -21,9 +21,9 @@ class Hybrid_Providers_PublicityPort extends Hybrid_Provider_Model_OAuth2
 		parent::initialize();
 		
 		// Provider api end-points
-		$this->api->api_base_url  = "http://myaccount.dev.publicityport.com/oauth/";
-		$this->api->authorize_url = "http://myaccount.dev.publicityport.com/oauth/authorize";	   
-		$this->api->token_url     = "http://myaccount.dev.publicityport.com/oauth/token";
+		$this->api->api_base_url  = "https://myaccount.publicityport.com/oauth/";
+		$this->api->authorize_url = "https://myaccount.publicityport.com/oauth/authorize";	   
+		$this->api->token_url     = "https://myaccount.publicityport.com/oauth/token";
 	}
 
 	/**
