@@ -11,7 +11,7 @@
 	Plugin License: GPLv2
 	Plugin Minimum Question2Answer Version: 1.6.3
 	Plugin Minimum PHP Version: 5
-	Plugin Update Check URI: https://github.com/PublicityPort/q2a-publicityport-login/master/qa-plugin.php
+	Plugin Update Check URI: https://raw.githubusercontent.com/PublicityPort/q2a-publicityport-login/master/qa-plugin.php
 */
 
 /*
