@@ -78,25 +78,6 @@ The translation file is **qa-publicityport-lang-default.php**.  Copy this file t
 
 Don't edit the string on the left-hand side. Once you've completed the translation, don't forget to set the site language in the admin control panel. Translations for Romanian are also included.
 
-
-
-## Change log ##
-
-**v3.0.0**
-
-* Change how duplicate accounts are displayed and linked together to make the process more straight-forward and to favor for less duplicates. Users are now forced to merge the entire user account, not just a login method. This approach simplifies both the business logic and the technical implementation. No additional work is necessary to get the new process working and existing users will not be impacted (no need to migrate anything).
-* Implement the ability to specify what account to keep when merging duplicate accounts.
-* Implement the ability to arbitrarily associate external logins with current account.
-* Implement the ability to hide the regular login/register forms and allow users to login only through external providers.
-* Improve the detection of duplicate accounts, which now works fine even if the plugin is installed after users created their accounts.
-* Improve the layout of the `logins` page.
-* New widget which shows all the login buttons in the sidebar, as an alternative to header buttons.
-* Changes to Google provider: the "Login with Google" (OAuth2) provider is the default one for Google. If you need "Login with Google Plus", you can still use it (it's been renamed to `GooglePlus`). The reason for this change is that "Login with Google Plus" requires users to have a Google+ account, and from Q2A point of view this is an artificial requirement not needed for the login process to work properly. This change does not affect existing accounts.
-* Update CSS file. Important! If a custom theme is used it must be manually updated.
-* Translation files (Russian, Spanish and French) have been removed because of the massive translation changes in this new version.
-
-Due to navigation menu changes in Q2A version 1.6.3, the plugin now requires Q2A 1.6.3. Older versions of Q2A should use a previous version of the plugin. 
-
 ## Disclaimer ##
 This code has not been extensively tested on high-traffic installations of Q2A. You should perform your own tests before using this plugin on a live (production) environment. 
 
