@@ -19,7 +19,7 @@ The plugin also offers the ability to link multiple OpenID/OAuth-powered logins 
 
    - To download using git, install git and then type 
       
-      `git clone git://github.com/alixandru/q2a-publicityport-login.git publicityport-login`
+      `git clone https://github.com/PublicityPort/q2a-publicityport-login.git`
       
    - To download directly, go to the [project page][Github] and click **[Download ZIP][download]**
 
@@ -40,10 +40,10 @@ The plugin also offers the ability to link multiple OpenID/OAuth-powered logins 
 
   [Question2Answer]: http://www.question2answer.org/install.php
   [Git]: http://git-scm.com/
-  [Github]: https://github.com/alixandru/q2a-publicityport-login
+  [Github]: https://github.com/PublicityPort/q2a-publicityport-login
   [cURL]: http://www.php.net/manual/en/book.curl.php
   [JSON]: http://www.php.net/manual/en/book.json.php
-  [download]: https://github.com/alixandru/q2a-publicityport-login/archive/master.zip
+  [download]: https://github.com/PublicityPort/q2a-publicityport-login/archive/master.zip
 
 
 ### Adding new login providers ###
@@ -96,56 +96,6 @@ Don't edit the string on the left-hand side. Once you've completed the translati
 * Translation files (Russian, Spanish and French) have been removed because of the massive translation changes in this new version.
 
 Due to navigation menu changes in Q2A version 1.6.3, the plugin now requires Q2A 1.6.3. Older versions of Q2A should use a previous version of the plugin. 
-
-
-**v2.1.1**
-
-* Add Spanish translation, contributed by [jorpcolombia](https://github.com/jorpcolombia)
-* Fix Yahoo OpenID issue with PHP 5.5.3+ / cURL 7.32.0+
-
-
-**v2.1.0**
-
-* Change all login URLs to point to `/login` to avoid SEO issues (old login URLs will still work)
-* Correct URL issue with Windows Live provider
-* Fix issue with email which was lost when connecting a new login
-* Small CSS changes
-* Code cleanup
-
-
-**v2.0.2**
-
-* Add Russian translation, contributed by [Dmitry Mikhirev](https://github.com/mikhirev)
-* Updated documentation with information on error handling
-* Other small fixes
-
-
-**v2.0.1**
-
-* Add links to the HybridAuth documentation pages from the plugin admin section
-* Correct layout issue with Windows Live provider
-* Translation changes and other small fixes
-
-
-**v2.0.0**
-
-* Rewrite the plugin to use HybridAuth 2.1.2
-* Add the ability to specify what login providers to appear in the page header
-* Add the ability to specify whether to use a CSS3 icon pack or plain links
-* The plugin requires Q2A 1.6. Older versions of Q2A should use version 1.1.0 of the plugin
-
-
-**v1.1.0**
-
-* Add the ability to keep users connected when they log in through an external provider
-* Fix issues with logging users out
-
-
-**v1.0.0**
-
-* Initial release which supports logging in through Facebook, Google, Yahoo and Github.
-
-
 
 ## Disclaimer ##
 This code has not been extensively tested on high-traffic installations of Q2A. You should perform your own tests before using this plugin on a live (production) environment. 
