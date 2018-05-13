@@ -4,7 +4,7 @@
 	Plugin Name: PublicityPort Login
 	Plugin URI: https://github.com/PublicityPort/q2a-publicityport-login
 	Plugin Description: Allows users to log in via PublicityPort's credentials.
-	Plugin Version: 1.0.0
+	Plugin Version: 1.0.3
 	Plugin Date: 2014-09-09
 	Plugin Author: Publicity Port
 	Plugin Author URI: https://publicityport.com

@@ -1,0 +1,12 @@
+{
+    "name": "PublicityPort Login.",
+    "uri" : "https://github.com/PublicityPort/q2a-publicityport-login",
+	"description": "Allows users to log in via PublicityPort's credentials",
+	"version": "1.0.3",
+	"date": "2014-09-09",
+	"author": "Pubiclity Port",
+    "author_uri": "https://publicityport.com",
+    "update_uri": "https://raw.githubusercontent.com/PublicityPort/q2a-publicityport-login/master/metadata.json",
+    "min_q2a": "1.8.0",
+    "load_order": "after_db_init"
+}
